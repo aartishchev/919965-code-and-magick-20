@@ -184,11 +184,11 @@
 <script>
 var fireballSize = 22;
 
-function getFireballSpeed (isWindFromRight) {
-  if (isWindFromRight) {
-    return 5;
+function getFireballSpeed (isAgainstWind) {
+  if (isAgainstWind) {
+    return 2;
   }
-  return 2;
+  return 5;
 }
 
 var wizardSpeed = 3;
