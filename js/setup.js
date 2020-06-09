@@ -1,51 +1,60 @@
 'use strict';
 
-// константы и переменные
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SECOND_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_QUANTITY = 4;
 
-var wizards = []; // пустой массив для магов
-var userDialog = document.querySelector('.setup'); // основной блок
-var similarListElement = userDialog.querySelector('.setup-similar-list'); // контейнер для магов
-var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-.content
-.querySelector('.setup-similar-item'); // шаблон
-
-// функции
-var getRandomArrElement = function (array) {
-  return array[Math.floor(Math.random() * array.length)];
-};
-
-var getRandomInt = function (min, max) {
+var getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var getRandomWizardName = function () {
-  var randomName = '';
-  var randomNumber = getRandomInt(0, 1);
-  var firstSequence = getRandomArrElement(WIZARD_NAMES) + ' ' + getRandomArrElement(WIZARD_SECOND_NAMES);
-  var secondSequence = getRandomArrElement(WIZARD_SECOND_NAMES) + ' ' + getRandomArrElement(WIZARD_NAMES);
-  if (randomNumber) {
-    randomName = firstSequence;
-  } else {
-    randomName = secondSequence;
-  }
-  return randomName;
+var getRandomArrayElement = function (array) {
+  return array[getRandomInteger(0, array.length - 1)];
 };
 
-var getWizards = function (array, quantity) {
-  for (var i = 0; i < quantity; i++) {
-    var currentWizard = {};
-    currentWizard.name = getRandomWizardName();
-    currentWizard.coatColor = getRandomArrElement(WIZARD_COAT_COLORS);
-    currentWizard.eyesColor = getRandomArrElement(WIZARD_EYES_COLORS);
-    array.push(currentWizard);
+var getWizardName = function () {
+  var firstName = getRandomArrayElement(WIZARD_NAMES);
+  var secondName = getRandomArrayElement(WIZARD_SECOND_NAMES);
+  var isNameFirst = getRandomInteger(0, 1);
+  if (isNameFirst) {
+    return firstName + ' ' + secondName;
+  } else {
+    return secondName + ' ' + firstName;
   }
-  return array;
 };
+
+var getWizardCoatColor = function () {
+  var coatColor = getRandomArrayElement(WIZARD_COAT_COLORS);
+  return coatColor;
+};
+
+var getWizardEyesColor = function () {
+  var eyesColor = getRandomArrayElement(WIZARD_EYES_COLORS);
+  return eyesColor;
+};
+
+var getWizards = function (wizards, quantity) {
+  for (var i = 0; i < quantity; i++) {
+    var name = getWizardName();
+    var coatColor = getWizardCoatColor();
+    var eyesColor = getWizardEyesColor();
+
+    var currentWizard = {
+      name: name,
+      coatColor: coatColor,
+      eyesColor: eyesColor
+    };
+
+    wizards.push(currentWizard);
+  }
+  return wizards;
+};
+
+var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+  .content
+  .querySelector('.setup-similar-item');
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -55,17 +64,22 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var renderFragment = function () {
+var renderWizardsFragment = function (wizards) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < wizards.length; i++) {
     fragment.appendChild(renderWizard(wizards[i]));
   }
-  similarListElement.appendChild(fragment);
+  return fragment;
 };
 
-// исполнение
-
+var wizards = [];
 getWizards(wizards, WIZARDS_QUANTITY);
+
+var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
-renderFragment();
+
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+var wizardsFragment = renderWizardsFragment(wizards);
+similarListElement.appendChild(wizardsFragment);
+
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
