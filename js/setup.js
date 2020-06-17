@@ -81,16 +81,17 @@ similarListElement.appendChild(wizardsFragment);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
-var userNameInput = document.querySelector('.setup-user-name');
+
 var wizardAppearance = setup.querySelector('.setup-wizard-appearance');
 var wizardCoat = wizardAppearance.querySelector('.wizard-coat');
 var wizardEyes = wizardAppearance.querySelector('.wizard-eyes');
 var fireBall = setup.querySelector('.setup-fireball');
 
 var onPopupEscPress = function (evt) {
+  var userNameInput = document.querySelector('.setup-user-name');
   var currentElement = document.activeElement;
   if (evt.key === 'Escape' && currentElement !== userNameInput) {
     evt.preventDefault();
@@ -115,7 +116,7 @@ var onEyesClick = function () {
 var onFireBallClick = function () {
   var fireBallColor = getRandomArrayElement(FIREBALL_COLORS);
   fireBall.parentElement.style.background = fireBallColor;
-  fireBall.nextElementSibling.value = fireBallColor;
+  fireBall.querySelector('name="fireball-color"').value = fireBallColor;
 };
 
 var openPopup = function () {
@@ -146,10 +147,4 @@ setupOpen.addEventListener('keydown', function (evt) {
 
 setupClose.addEventListener('click', function () {
   closePopup();
-});
-
-setupClose.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
-    closePopup();
-  }
 });

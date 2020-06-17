@@ -758,9 +758,10 @@ input[type=radio]:checked + .review-mark-label
     float: right;
 
     cursor: pointer;
-    transform: translateY(-.3em);
+    transform: translateY(-.25em);
 
     color: #000;
+    background-color: #89a1fd;
 }
 
 .setup-artifacts-shop
