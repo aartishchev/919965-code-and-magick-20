@@ -83,11 +83,10 @@ userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
-var setupClose = setup.querySelector('.setup-close');
 
-var wizardAppearance = setup.querySelector('.setup-wizard-appearance');
-var wizardCoat = wizardAppearance.querySelector('.wizard-coat');
-var wizardEyes = wizardAppearance.querySelector('.wizard-eyes');
+var setupClose = setup.querySelector('.setup-close');
+var wizardCoat = setup.querySelector('.wizard-coat');
+var wizardEyes = setup.querySelector('.wizard-eyes');
 var fireBall = setup.querySelector('.setup-fireball');
 
 var onPopupEscPress = function (evt) {
@@ -99,25 +98,18 @@ var onPopupEscPress = function (evt) {
   }
 };
 
-var onCoatClick = function () {
-  var coatColor = getRandomArrayElement(WIZARD_COAT_COLORS);
-  var coatColorInput = wizardAppearance.querySelector('[name="coat-color"]');
-  wizardCoat.style.fill = coatColor;
-  coatColorInput.value = coatColor;
+var createInterfaceClickHandler = function (colorsArray, inputNameAttribute, elementToStyle, styleFeature) {
+  return function () {
+    var color = getRandomArrayElement(colorsArray);
+    var input = setup.querySelector('[name="' + inputNameAttribute + '"]');
+    input.value = color;
+    elementToStyle.style[styleFeature] = color;
+  };
 };
 
-var onEyesClick = function () {
-  var eyesColor = getRandomArrayElement(WIZARD_EYES_COLORS);
-  var eyesColorInput = wizardAppearance.querySelector('[name="eyes-color"]');
-  wizardEyes.style.fill = eyesColor;
-  eyesColorInput.value = eyesColor;
-};
-
-var onFireBallClick = function () {
-  var fireBallColor = getRandomArrayElement(FIREBALL_COLORS);
-  fireBall.parentElement.style.background = fireBallColor;
-  fireBall.querySelector('name="fireball-color"').value = fireBallColor;
-};
+var onCoatClick = createInterfaceClickHandler(WIZARD_COAT_COLORS, 'coat-color', wizardCoat, 'fill');
+var onEyesClick = createInterfaceClickHandler(WIZARD_EYES_COLORS, 'eyes-color', wizardEyes, 'fill');
+var onFireBallClick = createInterfaceClickHandler(FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color');
 
 var openPopup = function () {
   setup.classList.remove('hidden');
