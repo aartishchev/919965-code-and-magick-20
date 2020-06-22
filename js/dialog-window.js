@@ -3,7 +3,6 @@
 (function () {
   var setup = document.querySelector('.setup');
 
-
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var dialogHandle = setup.querySelector('.upload');
@@ -21,17 +20,13 @@
     }
   };
 
-  var offsetX;
-  var offsetY;
+  var setEmptyCoordinates = function (element) {
+    element.style.left = '';
+    element.style.top = '';
+  };
 
   var openPopup = function () {
     setup.classList.remove('hidden');
-
-    setup.style.top = '';
-    setup.style.left = '';
-    offsetX = setup.offsetLeft;
-    offsetY = setup.offsetTop;
-
     document.addEventListener('keydown', onPopupEscPress);
     wizardCoat.addEventListener('click', window.wizardSettings.onCoatClick);
     wizardEyes.addEventListener('click', window.wizardSettings.onEyesClick);
@@ -46,9 +41,7 @@
     wizardEyes.removeEventListener('click', window.wizardSettings.onEyesClick);
     fireBall.removeEventListener('click', window.wizardSettings.onFireBallClick);
     dialogHandle.removeEventListener('mousedown', window.windowMove.onMoveEvent);
-
-    setup.style.top = offsetY + 'px';
-    setup.style.left = offsetX + 'px';
+    setEmptyCoordinates(setup);
   };
 
   setupOpen.addEventListener('click', function () {
@@ -56,7 +49,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, openPopup());
+    window.util.isEnterEvent(evt, openPopup);
   });
 
   setupClose.addEventListener('click', function () {
