@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var WIZARDS_QUANTITY = 4;
-
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -27,7 +25,7 @@
   var userDialog = document.querySelector('.setup');
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-  var wizards = window.wizardsCreation.getWizards(WIZARDS_QUANTITY);
+  var wizards = window.wizardsCreation.getWizards(window.consts.WIZARDS_QUANTITY);
   var wizardsFragment = renderWizardsFragment(wizards);
 
   var similarListElement = userDialog.querySelector('.setup-similar-list');

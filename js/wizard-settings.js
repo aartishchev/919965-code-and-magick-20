@@ -1,7 +1,5 @@
 'use strict';
 (function () {
-  var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
   var setup = document.querySelector('.setup');
   var wizardCoat = setup.querySelector('.wizard-coat');
   var wizardEyes = setup.querySelector('.wizard-eyes');
@@ -17,13 +15,13 @@
   };
 
   var onCoatClick = createInterfaceClickHandler(
-      window.commonConstants.WIZARD_COAT_COLORS, 'coat-color', wizardCoat, 'fill'
+      window.window.consts.WIZARD_COAT_COLORS, 'coat-color', wizardCoat, 'fill'
   );
   var onEyesClick = createInterfaceClickHandler(
-      window.commonConstants.WIZARD_EYES_COLORS, 'eyes-color', wizardEyes, 'fill'
+      window.window.consts.WIZARD_EYES_COLORS, 'eyes-color', wizardEyes, 'fill'
   );
   var onFireBallClick = createInterfaceClickHandler(
-      FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color'
+      window.consts.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color'
   );
 
   window.wizardSettings = {
@@ -31,4 +29,5 @@
     onEyesClick: onEyesClick,
     onFireBallClick: onFireBallClick
   };
+
 })();
