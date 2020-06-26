@@ -1,9 +1,12 @@
 'use strict';
 (function () {
   var setup = document.querySelector('.setup');
+  var avatarInput = setup.querySelector('[name="avatar"]');
   var wizardCoat = setup.querySelector('.wizard-coat');
   var wizardEyes = setup.querySelector('.wizard-eyes');
   var fireBall = setup.querySelector('.setup-fireball');
+
+  avatarInput.style.cursor = 'move'; // а почему не работает, если повесить на обработчик? по идее свойство работает со всеми элементами
 
   var createInterfaceClickHandler = function (colorsArray, inputNameAttribute, elementToStyle, styleFeature) {
     return function () {

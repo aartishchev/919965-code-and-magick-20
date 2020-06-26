@@ -3,7 +3,6 @@
 (function () {
   var setupDialogElement = document.querySelector('.setup');
   var dialogHandle = setupDialogElement.querySelector('.upload');
-  dialogHandle.style.cursor = 'move'; // не работает почему-то
 
   var onMoveEvent = function (evt) {
     evt.preventDefault();
