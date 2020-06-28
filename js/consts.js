@@ -40,10 +40,6 @@
     'green'
   ];
 
-  var URL_LOAD = 'https://javascript.pages.academy/code-and-magick/data';
-  var URL_SAVE = 'https://javascript.pages.academy/code-and-magick';
-  var TIMEOUT_IN_MS = 10000;
-
   window.consts = {
     CLOUD_WIDTH: CLOUD_WIDTH,
     CLOUD_HEIGHT: CLOUD_HEIGHT,
@@ -62,9 +58,6 @@
     WIZARD_NAMES: WIZARD_NAMES,
     WIZARD_SECOND_NAMES: WIZARD_SECOND_NAMES,
     FIREBALL_COLORS: FIREBALL_COLORS,
-    URL_LOAD: URL_LOAD,
-    URL_SAVE: URL_SAVE,
-    TIMEOUT_IN_MS: TIMEOUT_IN_MS
   };
 
 })();
