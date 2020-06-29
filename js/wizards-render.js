@@ -24,16 +24,33 @@
   };
 
   var userDialog = document.querySelector('.setup');
+  var similarListElement = userDialog.querySelector('.setup-similar-list');
 
-  var onSuccessLoad = function (wizards) {
+  var positionWizards = function (wizards) {
     var wizardsFragment = renderWizardsFragment(wizards);
-    var similarListElement = userDialog.querySelector('.setup-similar-list');
     similarListElement.appendChild(wizardsFragment);
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  var onSuccessSave = function () {
-    userDialog.classList.add('hidden');
+  var clearWizards = function () {
+    while (similarListElement.firstChild) {
+      similarListElement.removeChild(similarListElement.firstChild);
+    }
+  };
+
+  var loadedWizards;
+
+  var renderWizards = function () {
+    if (loadedWizards) {
+      positionWizards(loadedWizards);
+    } else {
+      wizardsLoad();
+    }
+  };
+
+  var onSuccessLoad = function (wizards) {
+    positionWizards(wizards);
+    loadedWizards = wizards;
   };
 
   var onError = function (errorMessage) {
@@ -53,14 +70,19 @@
 
   var form = userDialog.querySelector('.setup-wizard-form');
 
+  var onSuccessSave = function () {
+    userDialog.classList.add('hidden');
+  };
+
   var submitEvent = function (evt) {
     window.backend.save(onSuccessSave, onError, new FormData(form));
     evt.preventDefault();
   };
 
   window.wizardsRender = {
-    wizardsLoad: wizardsLoad,
-    submitEvent: submitEvent
+    renderWizards: renderWizards,
+    submitEvent: submitEvent,
+    clearWizards: clearWizards
   };
 
 })();

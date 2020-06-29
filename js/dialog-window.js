@@ -27,7 +27,7 @@
   };
 
   var openPopup = function () {
-    window.wizardsRender.wizardsLoad();
+    window.wizardsRender.renderWizards();
     setup.classList.remove('hidden');
 
     document.addEventListener('keydown', onPopupEscPress);
@@ -39,8 +39,10 @@
   };
 
   var closePopup = function () {
+    window.wizardsRender.clearWizards();
     setup.classList.add('hidden');
     setEmptyCoordinates(setup);
+
 
     document.removeEventListener('keydown', onPopupEscPress);
     wizardCoat.removeEventListener('click', window.wizardSettings.onCoatClick);
