@@ -41,12 +41,13 @@
   var loadedWizards = null;
 
   var renderWizards = function () {
-    if (!similarListElement.hasChildNodes()) {
-      if (loadedWizards) {
-        positionWizards(loadedWizards);
-      } else {
-        wizardsLoad();
-      }
+    if (similarListElement.hasChildNodes()) {
+      return;
+    }
+    if (loadedWizards) {
+      positionWizards(loadedWizards);
+    } else {
+      wizardsLoad();
     }
   };
 
