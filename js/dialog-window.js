@@ -43,7 +43,6 @@
     setup.classList.add('hidden');
     setEmptyCoordinates(setup);
 
-
     document.removeEventListener('keydown', onPopupEscPress);
     wizardCoat.removeEventListener('click', window.wizardSettings.onCoatClick);
     wizardEyes.removeEventListener('click', window.wizardSettings.onEyesClick);

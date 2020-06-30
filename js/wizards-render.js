@@ -38,7 +38,7 @@
     }
   };
 
-  var loadedWizards;
+  var loadedWizards = null;
 
   var renderWizards = function () {
     if (loadedWizards) {
