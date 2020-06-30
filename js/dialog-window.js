@@ -2,6 +2,7 @@
 
 (function () {
   var setup = document.querySelector('.setup');
+  var form = setup.querySelector('.setup-wizard-form');
 
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
@@ -26,22 +27,28 @@
   };
 
   var openPopup = function () {
+    window.wizardsRender.renderWizards();
     setup.classList.remove('hidden');
+
     document.addEventListener('keydown', onPopupEscPress);
     wizardCoat.addEventListener('click', window.wizardSettings.onCoatClick);
     wizardEyes.addEventListener('click', window.wizardSettings.onEyesClick);
     fireBall.addEventListener('click', window.wizardSettings.onFireBallClick);
     dialogHandle.addEventListener('mousedown', window.windowMove.onMoveEvent);
+    form.addEventListener('submit', window.wizardsRender.submitEvent);
   };
 
   var closePopup = function () {
+    window.wizardsRender.clearWizards();
     setup.classList.add('hidden');
+    setEmptyCoordinates(setup);
+
     document.removeEventListener('keydown', onPopupEscPress);
     wizardCoat.removeEventListener('click', window.wizardSettings.onCoatClick);
     wizardEyes.removeEventListener('click', window.wizardSettings.onEyesClick);
     fireBall.removeEventListener('click', window.wizardSettings.onFireBallClick);
     dialogHandle.removeEventListener('mousedown', window.windowMove.onMoveEvent);
-    setEmptyCoordinates(setup);
+    form.removeEventListener('submit', window.wizardsRender.submitEvent);
   };
 
   setupOpen.addEventListener('click', function () {

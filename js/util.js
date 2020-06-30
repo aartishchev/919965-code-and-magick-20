@@ -8,6 +8,20 @@
     return array[getRandomInteger(0, array.length - 1)];
   };
 
+  var shuffleArray = function (array) {
+    var currentIndex = array.length;
+    var temporaryValue;
+    var randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = getRandomInteger(0, array.length - 1);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
+
   var getMaxElement = function (arr) {
     var maxElement = arr[0];
     for (var i = 1; i < arr.length; i++) {
@@ -28,6 +42,7 @@
     getRandomInteger: getRandomInteger,
     getRandomArrayElement: getRandomArrayElement,
     getMaxElement: getMaxElement,
-    isEnterEvent: isEnterEvent
+    isEnterEvent: isEnterEvent,
+    shuffleArray: shuffleArray
   };
 })();
