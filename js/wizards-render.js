@@ -41,10 +41,12 @@
   var loadedWizards = null;
 
   var renderWizards = function () {
-    if (loadedWizards) {
-      positionWizards(loadedWizards);
-    } else {
-      wizardsLoad();
+    if (!similarListElement.hasChildNodes()) {
+      if (loadedWizards) {
+        positionWizards(loadedWizards);
+      } else {
+        wizardsLoad();
+      }
     }
   };
 
@@ -72,6 +74,7 @@
 
   var onSuccessSave = function () {
     userDialog.classList.add('hidden');
+    clearWizards();
   };
 
   var submitEvent = function (evt) {

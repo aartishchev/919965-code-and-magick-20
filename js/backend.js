@@ -8,7 +8,12 @@
     OK: 200
   };
 
-  var request = function (url, method, onLoad, onError, data) {
+  var request = function (url, params) {
+    var method = params.method;
+    var onLoad = params.onLoad;
+    var onError = params.onError;
+    var data = params.data;
+
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.open(method, url);
@@ -30,11 +35,20 @@
   };
 
   var load = function (onLoad, onError) {
-    request(URL_LOAD, 'GET', onLoad, onError);
+    request(URL_LOAD, {
+      method: 'GET',
+      onLoad: onLoad,
+      onError: onError
+    });
   };
 
   var save = function (onLoad, onError, data) {
-    request(URL_SAVE, 'POST', onLoad, onError, data);
+    request(URL_SAVE, {
+      method: 'POST',
+      onLoad: onLoad,
+      onError: onError,
+      data: data
+    });
   };
 
   window.backend = {
