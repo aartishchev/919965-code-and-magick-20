@@ -16,7 +16,7 @@
   var renderWizardsFragment = function (wizards) {
     var shuffledWizards = window.util.shuffleArray(wizards);
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < window.consts.WIZARDS_QUANTITY; i++) {
+    for (var i = 0; i < window.consts.wizard.QUANTITY; i++) {
       var currentDomWizard = renderWizard(shuffledWizards[i]);
       fragment.appendChild(currentDomWizard);
     }

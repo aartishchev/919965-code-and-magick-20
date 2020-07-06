@@ -18,13 +18,13 @@
   };
 
   var onCoatClick = createInterfaceClickHandler(
-      window.window.consts.WIZARD_COAT_COLORS, 'coat-color', wizardCoat, 'fill'
+      window.window.consts.wizard.COAT_COLORS, 'coat-color', wizardCoat, 'fill'
   );
   var onEyesClick = createInterfaceClickHandler(
-      window.window.consts.WIZARD_EYES_COLORS, 'eyes-color', wizardEyes, 'fill'
+      window.window.consts.wizard.EYES_COLORS, 'eyes-color', wizardEyes, 'fill'
   );
   var onFireBallClick = createInterfaceClickHandler(
-      window.consts.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color'
+      window.consts.wizard.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color'
   );
 
   window.wizardSettings = {
