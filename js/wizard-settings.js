@@ -8,31 +8,6 @@
 
   avatarInput.style.cursor = 'move'; // а почему не работает, если повесить на обработчик? по идее свойство работает со всеми элементами
 
-  var createInterfaceClickHandler = function (colorsArray, inputNameAttribute, elementToStyle, styleFeature) {
-    return function () {
-      var color = window.util.getRandomArrayElement(colorsArray);
-      var input = setup.querySelector('[name="' + inputNameAttribute + '"]');
-      input.value = color;
-      elementToStyle.style[styleFeature] = color;
-
-      if (elementToStyle === wizardCoat) {
-        currentCoatColor = color;
-      }
-      if (elementToStyle === wizardEyes) {
-        currentEyesColor = color;
-      }
-
-      updateWizards();
-    };
-  };
-
-  var onCoatClick = createInterfaceClickHandler(window.window.consts.wizard.COAT_COLORS, 'coat-color', wizardCoat, 'fill');
-  var onEyesClick = createInterfaceClickHandler(window.window.consts.wizard.EYES_COLORS, 'eyes-color', wizardEyes, 'fill');
-  var onFireBallClick = createInterfaceClickHandler(window.consts.wizard.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color');
-
-  var currentCoatColor = 'rgb(101, 137, 164)';
-  var currentEyesColor = 'black';
-
   var getRank = function (wizard) {
     var rank = 0;
     if (wizard.colorCoat === currentCoatColor) {
@@ -54,14 +29,6 @@
     }
   };
 
-  // var updateWizards = function () {
-  //   var sameCoatWizards = window.wizardsRender.loadedWizards.filter(function (it) {
-  //     return it.colorCoat === currentCoatColor;
-  //   });
-  //   window.wizardsRender.clearWizards();
-  //   window.wizardsRender.positionWizards(sameCoatWizards);
-  // };
-
   var updateWizards = function () {
     window.wizardsRender.clearWizards();
     window.wizardsRender.positionWizards(window.wizardsRender.loadedWizards.sort(function (left, right) {
@@ -72,6 +39,29 @@
       return rankDiff;
     }));
   };
+
+  var currentCoatColor = 'rgb(101, 137, 164)';
+  var currentEyesColor = 'black';
+
+  var createInterfaceClickHandler = function (colorsArray, inputNameAttribute, elementToStyle, styleFeature) {
+    return function () {
+      var color = window.util.getRandomArrayElement(colorsArray);
+      var input = setup.querySelector('[name="' + inputNameAttribute + '"]');
+      input.value = color;
+      elementToStyle.style[styleFeature] = color;
+      if (elementToStyle === wizardCoat) {
+        currentCoatColor = color;
+      }
+      if (elementToStyle === wizardEyes) {
+        currentEyesColor = color;
+      }
+      updateWizards();
+    };
+  };
+
+  var onCoatClick = window.util.debounce(createInterfaceClickHandler(window.window.consts.wizard.COAT_COLORS, 'coat-color', wizardCoat, 'fill'));
+  var onEyesClick = window.util.debounce(createInterfaceClickHandler(window.window.consts.wizard.EYES_COLORS, 'eyes-color', wizardEyes, 'fill'));
+  var onFireBallClick = createInterfaceClickHandler(window.consts.wizard.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color');
 
   window.wizardSettings = {
     onCoatClick: onCoatClick,
