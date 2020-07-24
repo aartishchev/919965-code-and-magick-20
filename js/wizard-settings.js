@@ -29,7 +29,7 @@
     }
   };
 
-  var updateWizards = function () {
+  var updateWizards = window.util.debounce(function () {
     window.wizardsRender.clearWizards();
     window.wizardsRender.positionWizards(window.wizardsRender.loadedWizards.sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
@@ -38,7 +38,7 @@
       }
       return rankDiff;
     }));
-  };
+  });
 
   var currentCoatColor = 'rgb(101, 137, 164)';
   var currentEyesColor = 'black';
@@ -59,8 +59,8 @@
     };
   };
 
-  var onCoatClick = window.util.debounce(createInterfaceClickHandler(window.window.consts.wizard.COAT_COLORS, 'coat-color', wizardCoat, 'fill'));
-  var onEyesClick = window.util.debounce(createInterfaceClickHandler(window.window.consts.wizard.EYES_COLORS, 'eyes-color', wizardEyes, 'fill'));
+  var onCoatClick = createInterfaceClickHandler(window.window.consts.wizard.COAT_COLORS, 'coat-color', wizardCoat, 'fill');
+  var onEyesClick = createInterfaceClickHandler(window.window.consts.wizard.EYES_COLORS, 'eyes-color', wizardEyes, 'fill');
   var onFireBallClick = createInterfaceClickHandler(window.consts.wizard.FIREBALL_COLORS, 'fireball-color', fireBall.parentElement, 'background-color');
 
   window.wizardSettings = {
