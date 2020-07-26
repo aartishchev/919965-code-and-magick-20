@@ -2,8 +2,8 @@
 
 (function () {
   var getWizardName = function () {
-    var firstName = window.util.getRandomArrayElement(window.consts.WIZARD_NAMES);
-    var secondName = window.util.getRandomArrayElement(window.consts.WIZARD_SECOND_NAMES);
+    var firstName = window.util.getRandomArrayElement(window.consts.wizard.NAMES);
+    var secondName = window.util.getRandomArrayElement(window.consts.wizard.SECOND_NAMES);
     var isNameFirst = window.util.getRandomInteger(0, 1);
     if (isNameFirst) {
       return firstName + ' ' + secondName;
@@ -13,11 +13,11 @@
   };
 
   var getWizardCoatColor = function () {
-    return window.util.getRandomArrayElement(window.consts.WIZARD_COAT_COLORS);
+    return window.util.getRandomArrayElement(window.consts.wizard.COAT_COLORS);
   };
 
   var getWizardEyesColor = function () {
-    return window.util.getRandomArrayElement(window.consts.WIZARD_EYES_COLORS);
+    return window.util.getRandomArrayElement(window.consts.wizard.EYES_COLORS);
   };
 
   var getWizard = function () {

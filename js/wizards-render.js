@@ -14,10 +14,14 @@
   };
 
   var renderWizardsFragment = function (wizards) {
-    var shuffledWizards = window.util.shuffleArray(wizards);
+    // var shuffledWizards = window.util.shuffleArray(wizards);
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < window.consts.WIZARDS_QUANTITY; i++) {
-      var currentDomWizard = renderWizard(shuffledWizards[i]);
+    var currentArrayLength = window.consts.wizard.QUANTITY;
+    if (window.consts.wizard.QUANTITY > wizards.length) {
+      currentArrayLength = wizards.length;
+    }
+    for (var i = 0; i < currentArrayLength; i++) {
+      var currentDomWizard = renderWizard(wizards[i]);
       fragment.appendChild(currentDomWizard);
     }
     return fragment;
@@ -41,18 +45,20 @@
   var loadedWizards = null;
 
   var renderWizards = function () {
-    if (!similarListElement.hasChildNodes()) {
-      if (loadedWizards) {
-        positionWizards(loadedWizards);
-      } else {
-        wizardsLoad();
-      }
+    if (similarListElement.hasChildNodes()) {
+      return;
+    }
+    if (loadedWizards) {
+      positionWizards(loadedWizards);
+    } else {
+      wizardsLoad();
     }
   };
 
   var onSuccessLoad = function (wizards) {
     positionWizards(wizards);
     loadedWizards = wizards;
+    window.wizardsRender.loadedWizards = loadedWizards; // если так не перезаписать, почему-то при загрузке все равно останется null
   };
 
   var onError = function (errorMessage) {
@@ -85,7 +91,9 @@
   window.wizardsRender = {
     renderWizards: renderWizards,
     submitEvent: submitEvent,
-    clearWizards: clearWizards
+    clearWizards: clearWizards,
+    positionWizards: positionWizards,
+    loadedWizards: loadedWizards
   };
 
 })();
