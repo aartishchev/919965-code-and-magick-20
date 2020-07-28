@@ -28,6 +28,7 @@
 
   var openPopup = function () {
     window.wizardsRender.renderWizards();
+    window.avatar.addAvatarHandler();
     setup.classList.remove('hidden');
 
     document.addEventListener('keydown', onPopupEscPress);
@@ -40,6 +41,7 @@
 
   var closePopup = function () {
     window.wizardsRender.clearWizards();
+    window.avatar.removeAvatarHandler();
     setup.classList.add('hidden');
     setEmptyCoordinates(setup);
 
